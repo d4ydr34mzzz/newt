@@ -7,6 +7,16 @@ const app = express();
 const authRouter = require('./routes/auth.js');
 const port = process.env.PORT || 3000;
 
+// Get the appropriate database uri (development, testing, or production)
+const mongoURI = require('./config/database.js').mongoURI;
+
+// Connect to MongoDB
+mongoose.connect(mongoURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => console.log('MongoDB connected ...'))
+    .catch(err => console.log(err));
+
 // Configure the strategies used by Passport
 require('./config/passport.js')(passport);
 
