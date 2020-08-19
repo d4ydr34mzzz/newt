@@ -38,6 +38,12 @@ require('./config/passport.js')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Custom middleware to expose request-level information using res.locals
+app.use(function (req, res, next) {
+    res.locals.user = req.user || null;
+    next();
+});
+
 // Mount the router module for auth on the /auth path in the main app
 app.use('/auth', authRouter);
 
