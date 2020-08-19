@@ -2,11 +2,15 @@ const express = require('express');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const path = require('path');
 const MongoStore = require('connect-mongo')(session);
 require('dotenv').config();
 const app = express();
 const authRouter = require('./routes/auth.js');
 const port = process.env.PORT || 3000;
+
+// Specify the location of the public folder to serve static assets
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Get the appropriate database uri (development, testing, or production)
 const mongoURI = require('./config/database.js').mongoURI;
