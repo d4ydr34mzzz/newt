@@ -16,7 +16,7 @@ router.get('/google',
     })
 );
 
-// Route path Google will redirect the user to after authorization.
+// Route path Google will redirect the user to after authorization
 router.get('/google/callback',
     passport.authenticate('google', {
         failureRedirect: '/'

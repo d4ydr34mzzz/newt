@@ -16,7 +16,11 @@ module.exports = function (passport) {
             // Unlike a local strategy, we can create a user here because Google
             // returns information about a user that we need that would otherwise require
             // a registration form
-            User.findOne({ googleId: profile.id }).then((err, user) => {
+            User.findOne({ googleId: profile.id }, function (err, user) {
+                // Using an arrow function here causes a problem where the err and user get switched around?
+                // Possibly related: https://mongoosejs.com/docs/guide.html:
+                // "Do not declare methods using ES6 arrow functions (=>). Arrow functions explicitly prevent binding this, so 
+                // your method will not have access to the document and the above examples will not work."
                 if (err) {
                     return done(err);
                 }
