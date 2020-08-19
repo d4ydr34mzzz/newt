@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const MongoStore = require('connect-mongo')(session);
 require('dotenv').config();
 const app = express();
 const authRouter = require('./routes/auth.js');
@@ -17,12 +18,21 @@ mongoose.connect(mongoURI, {
 }).then(() => console.log('MongoDB connected ...'))
     .catch(err => console.log(err));
 
+// Create a session middleware
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    cookie: { maxAge: 180 * 60 * 1000 }
+}));
+
 // Configure the strategies used by Passport
 require('./config/passport.js')(passport);
 
 // Passport middleware
 app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.session());
 
 // Mount the router module for auth on the /auth path in the main app
 app.use('/auth', authRouter);
