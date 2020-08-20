@@ -3,9 +3,11 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const path = require('path');
+const exhbs = require('express-handlebars');
 const MongoStore = require('connect-mongo')(session);
 require('dotenv').config();
 const app = express();
+const indexRouter = require('./routes/index.js');
 const authRouter = require('./routes/auth.js');
 const port = process.env.PORT || 3000;
 
@@ -44,12 +46,15 @@ app.use(function (req, res, next) {
     next();
 });
 
+//Set handlebars as the template engine to use with Express
+app.engine('handlebars', exhbs());
+app.set('view engine', 'handlebars');
+
+// Mount the router module for index on the / path in the main app
+app.use('/', indexRouter);
+
 // Mount the router module for auth on the /auth path in the main app
 app.use('/auth', authRouter);
-
-app.get('/', (req, res) => {
-    res.send('Hello World');
-});
 
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
