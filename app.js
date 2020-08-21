@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const path = require('path');
 const exhbs = require('express-handlebars');
+const bodyParser = require('body-parser');
 const MongoStore = require('connect-mongo')(session);
 require('dotenv').config();
 const app = express();
@@ -33,6 +34,12 @@ app.use(session({
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     cookie: { maxAge: 180 * 60 * 1000 }
 }));
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 // Configure the strategies used by Passport
 require('./config/passport.js')(passport);
