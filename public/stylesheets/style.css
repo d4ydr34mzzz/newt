@@ -6,6 +6,15 @@
     color: var(--main-green-color) !important;
 }
 
+.btn--main-green-color {
+    background-color: var(--main-green-color) !important;
+    border: 0px;
+}
+
+.card-header--plain {
+    background-color: white;
+}
+
 .third-party-login-btn {
     background-color: #00c853; 
     border: 0px;
@@ -61,4 +70,8 @@
 
 .nav-link--color:hover {
     color: var(--main-green-color) !important;
+}
+
+.editor-container--height {
+    height: 375px !important;
 }
