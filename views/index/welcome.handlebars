@@ -1,5 +1,7 @@
 <div class="jumbotron bg-white pl-0">
     <h1 class="display-4">Welcome to StoryBooks!</h1>
     <p class="lead">Write stories and share them with the world or keep them completely private as part of your own personal collection.</p>
-    <a href="/auth/google" class="btn btn-secondary third-party-login-btn"><i class="fa fa-google third-party-login-btn__icon--right-margin"></i>Login with Google</a>
+    {{#unless user}}
+        <a href="/auth/google" class="btn btn-secondary third-party-login-btn"><i class="fa fa-google third-party-login-btn__icon--right-margin"></i>Login with Google</a>
+    {{/unless}}
 </div>

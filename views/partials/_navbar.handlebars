@@ -10,13 +10,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link nav-link--color" href="/">Browse stories</a>
+                    <a class="nav-link nav-link--color" href="/stories">Browse stories</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
                 {{#if user}}
                     <li class="nav-item">
                         <a href="/dashboard" class="nav-link nav-link--color">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/stories/my" class="nav-link nav-link--color">My stories</a>
                     </li>
                     <li class="nav-item">
                         <a href="/auth/logout" class="nav-link nav-link--color">Log out</a>
