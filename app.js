@@ -9,6 +9,7 @@ require('dotenv').config();
 const app = express();
 const indexRouter = require('./routes/index.js');
 const authRouter = require('./routes/auth.js');
+const storiesRouter = require('./routes/stories.js');
 const port = process.env.PORT || 3000;
 
 // Specify the location of the public folder to serve static assets
@@ -41,8 +42,19 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Custom middleware to expose request-level information using res.locals
+// *** Important reference: https://stackoverflow.com/questions/59690923/handlebars-access-has-been-denied-to-resolve-the-property-from-because-it-is *** //
 app.use(function (req, res, next) {
-    res.locals.user = req.user || null;
+    if (req.user) {
+        const newUserObject = {
+            email: req.user.email,
+            firstName: req.user.firstName,
+            lastName: req.user.lastName,
+            picture: req.user.picture,
+            fullName: req.user.firstName + ' ' + req.user.lastName
+        }
+        
+        res.locals.user = newUserObject || null;
+    }
     next();
 });
 
@@ -55,6 +67,9 @@ app.use('/', indexRouter);
 
 // Mount the router module for auth on the /auth path in the main app
 app.use('/auth', authRouter);
+
+// Mount the router module for stories on the /stories path in the main app
+app.use('/stories', storiesRouter);
 
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
