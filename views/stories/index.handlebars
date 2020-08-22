@@ -3,7 +3,10 @@
         <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title">{{title}}</h5>
-                <p class="card-text">{{body}}</p>
+                {{!-- card-text--truncate fade effect reference: https://stackoverflow.com/questions/22666063/how-to-fade-the-edge-of-a-div-with-just-css --}}
+                <div class="card-text card-text--truncate">
+                    {{{bodyText}}}
+                </div>
                 <p class="card-text"><small class="text-muted">by {{user.firstName}} {{user.lastName}}</small></p>
             </div>
         </div>
