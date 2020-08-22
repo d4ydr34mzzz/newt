@@ -7,7 +7,11 @@ const storySchema = new Schema({
         type: String,
         required: true
     },
-    body: {
+    bodyText: {
+        type: String,
+        required: true
+    },
+    bodyDelta: {
         type: String,
         required: true
     },

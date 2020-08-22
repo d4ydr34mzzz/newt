@@ -34,12 +34,15 @@ router.post('/', ensureAuthenticated, (req, res) => {
 
     const newStory = {
         title: req.body.title,
-        body: req.body.story,
+        bodyText: req.body.storyText,
+        bodyDelta: req.body.storyDelta,
         status: req.body.status,
         allowComments: allowComments,
         user: req.user.id
     }
 
+    console.log(newStory);
+    
     new Story(newStory).save().then((story) => {
         res.redirect(`/stories/show/${story.id}`);
     });
