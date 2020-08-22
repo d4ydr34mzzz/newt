@@ -10,7 +10,11 @@ require('../models/Story.js');
 const Story = mongoose.model('Story');
 
 router.get('/', (req, res) => {
-    res.render('stories/index');
+    Story.find({ status: 'public' }).populate('user').lean().then((stories) => {
+        res.render('stories/index', {
+            stories: stories
+        });
+    });
 });
 
 router.get('/add', ensureAuthenticated, (req, res) => {
@@ -18,10 +22,10 @@ router.get('/add', ensureAuthenticated, (req, res) => {
 });
 
 router.post('/', ensureAuthenticated, (req, res) => {
-    
+
     // TODO: Handle errors in the form submission before saving anything to the database
     // TODO: Is it ok to save the Delta object directly to a document?
-    
+
     let allowComments = false;
 
     if (req.body.allowComments) {

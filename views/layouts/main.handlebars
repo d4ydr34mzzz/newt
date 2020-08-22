@@ -62,7 +62,8 @@
         
         // {{!-- Reference: https://codepen.io/quill/pen/kXRjQJ and https://quilljs.com/docs/api/#content --}}
         document.querySelector('form').addEventListener('submit', function () {
-            document.querySelector('input[name=story]').value = JSON.stringify(quill.getContents());
+            document.querySelector('input[name=story]').value = JSON.stringify(quill.root.innerHTML.trim());
+            console.log(quill.root.innerHTML);
         });
     </script>
 

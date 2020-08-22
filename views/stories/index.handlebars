@@ -1,1 +1,11 @@
-<h1>Public stories</h1>
+{{#each stories}}
+    <div class="col-sm-12 col-md-10 offset-md-1">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{title}}</h5>
+                <p class="card-text">{{body}}</p>
+                <p class="card-text"><small class="text-muted">by {{user.firstName}} {{user.lastName}}</small></p>
+            </div>
+        </div>
+    </div>
+{{/each}}
