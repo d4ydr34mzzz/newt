@@ -24,5 +24,9 @@ const userSchema = new Schema({
     }
 });
 
+userSchema.virtual('fullName').get(function () {
+    return this.firstName + ' ' + this.lastName;
+});
+
 // Convert the schema into a model we can work with
 mongoose.model('User', userSchema);

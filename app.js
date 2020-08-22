@@ -36,10 +36,10 @@ app.use(session({
 }));
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 // Configure the strategies used by Passport
 require('./config/passport.js')(passport);
