@@ -1,14 +1,16 @@
 {{#each stories}}
     <div class="col-sm-12 col-md-10 offset-md-1">
         <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">{{title}}</h5>
-                {{!-- card-text--truncate fade effect reference: https://stackoverflow.com/questions/22666063/how-to-fade-the-edge-of-a-div-with-just-css --}}
-                <div class="card-text card-text--truncate">
-                    {{{bodyText}}}
+            <a href="/stories/show/{{_id}}" class="a--default-style-removed">
+                <div class="card-body">
+                    <h5 class="card-title">{{title}}</h5>
+                    {{!-- card-text--truncate fade effect reference: https://stackoverflow.com/questions/22666063/how-to-fade-the-edge-of-a-div-with-just-css --}}
+                    <div class="card-text card-text--truncate">
+                        {{{bodyText}}}
+                    </div>
+                    <p class="card-text"><small class="text-muted">by {{user.firstName}} {{user.lastName}}</small></p>
                 </div>
-                <p class="card-text"><small class="text-muted">by {{user.firstName}} {{user.lastName}}</small></p>
-            </div>
+            </a>
         </div>
     </div>
 {{/each}}
