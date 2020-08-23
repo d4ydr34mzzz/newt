@@ -25,8 +25,14 @@
     {{> _navbar}}
     {{> _loginModal}}
 
-    <div class="container">
-        {{{body}}}
+    {{#if useGreyBackground}}
+        <div class="container-fluid pt-5 pb-5 container-fluid--use-viewport-height container-fluid--grey-background ">
+    {{else}}
+        <div class="container-fluid pt-5 pb-5 container-fluid--use-viewport-height">
+    {{/if}}
+        <div class="container">
+            {{{body}}}
+        </div>
     </div>
 
     {{!-- BootStrap scripts START --}}

@@ -1,1 +1,56 @@
-<h1>Edit story</h1>
+<div class="row">
+    <div class="col-sm-12 col-md-9">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title card-title--font-size text-center">{{story.title}}</h1>
+                <div class="card__section-divider"></div>
+                <div class="card__section">
+                    <p class="card-text">{{{story.bodyText}}}</p>
+                </div>
+                <div class="card__section-divider"></div>
+                <div class="card__section row">
+                    <div class="col-sm-12 col-md-6">
+                        <p class="card__p mb-md-0">
+                            0 views • {{formatDate story.date 'MMM DD, YYYY'}}
+                        </p>
+                    </div>
+                    {{!-- <div class="col-sm-6"></div> --}}
+                    <div class="col-sm-12 col-md-6 text-md-right text-sm-left">
+                        <span class="card__icons">
+                            <span class="card__individual_icon">
+                                <a href="#" class="a--default-style-removed">
+                                    <i class="fas fa-share-alt"></i>
+                                </a>
+                            </span>
+                            <span class="card__individual_icon">
+                                <a href="#" class="a--default-style-removed">
+                                    <i class="far fa-heart"></i>
+                                    {{!-- <i class="fas fa-heart"></i> --}}
+                                </a>
+                            </span>
+                            <span class="card__individual_icon">
+                                <a href="#" class="a--default-style-removed">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </a>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="card__section-divider card__section-divider--clear"></div>
+                <div class="card__section">
+                    <h2 class="section__title">Comments</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-8 col-md-3">
+        <div class="user-section">
+            <a href="#" class="a--default-style-removed">
+                <img src="{{story.user.picture}}" class="rounded-circle user-section__avatar" alt="">
+                <div class="user-section__username">{{story.user.firstName}} {{story.user.lastName}}</div>
+            </a>
+            <a href="#" class="btn btn-secondary user-section__follow-btn"><i class="fas fa-plus mr-2"></i>Follow</a>
+        </div>
+    </div>
+</div>

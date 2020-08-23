@@ -17,6 +17,20 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/show/:id', (req, res) => {
+    Story.findOne({ _id: req.params.id }).populate('user').lean().then((story) => {
+        console.log(story);
+        res.render('stories/show', {
+            useGreyBackground: true,
+            story: story
+        });
+    }).catch((e) => {
+        // TODO: Have a flash message saying there was an issue retrieving the specified story on the frontend
+        console.log(e);
+        res.redirect('/stories');
+    });
+});
+
 router.get('/add', ensureAuthenticated, (req, res) => {
     res.render('stories/add');
 });
@@ -38,13 +52,13 @@ router.post('/', ensureAuthenticated, (req, res) => {
         bodyDelta: req.body.storyDelta,
         status: req.body.status,
         allowComments: allowComments,
-        user: req.user.id
+        user: req.user._id
     }
 
     console.log(newStory);
-    
+
     new Story(newStory).save().then((story) => {
-        res.redirect(`/stories/show/${story.id}`);
+        res.redirect(`/stories/show/${story._id}`);
     });
 });
 
