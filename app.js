@@ -11,6 +11,7 @@ const app = express();
 const indexRouter = require('./routes/index.js');
 const authRouter = require('./routes/auth.js');
 const storiesRouter = require('./routes/stories.js');
+const { formatDate } = require('./helpers/hbs.js');
 const port = process.env.PORT || 3000;
 
 // Specify the location of the public folder to serve static assets
@@ -59,14 +60,22 @@ app.use(function (req, res, next) {
             picture: req.user.picture,
             fullName: req.user.firstName + ' ' + req.user.lastName
         }
-        
+
         res.locals.user = newUserObject || null;
     }
     next();
 });
 
+// Create an ExpressHandlebars instance
+const hbs = exhbs.create({
+    // Specify helpers which are only registered on this instance
+    helpers: {
+        formatDate: formatDate
+    }
+});
+
 //Set handlebars as the template engine to use with Express
-app.engine('handlebars', exhbs());
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 // Mount the router module for index on the / path in the main app
