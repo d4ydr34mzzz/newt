@@ -24,6 +24,11 @@
 
     {{> _navbar}}
     {{> _loginModal}}
+    {{> _confirmDeleteModal}}
+
+    {{#if dashboardHeader}}
+        <div class="container-fluid container-fluid--grey-background container-fluid--dashboard-header-image"></div>
+    {{/if}}
 
     {{#if useGreyBackground}}
         <div class="container-fluid pt-5 pb-5 container-fluid--use-viewport-height container-fluid--grey-background ">

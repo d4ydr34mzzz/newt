@@ -1,5 +1,32 @@
 {{#with user}}
-    <img src="{{picture}}" alt="" style="height:100px">
-    <h1>{{fullName}}</h1>
-    <h2>My stories</h2>
+<div class="container container--top-padding-compensation">
+    <img src="{{picture}}" alt="" class="rounded-circle dashboard__user-avatar">
+    <h1 class="dashboard__user-name ml-md-2">{{fullName}}</h1>
+    <a href="#" class="btn btn-secondary dashboard__follow-btn d-block d-sm-inline float-sm-right"><i
+            class="fas fa-plus mr-2"></i>Follow</a>
+</div>
 {{/with}}
+
+<div class="container pt-5">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link active sub-nav-menu--link sub-nav-menu--active" href="#">Stories</a>
+        </li>
+    </ul>
+    <div class="pt-4">
+        {{#each stories}}
+        <div class="card mb-3">
+            <a href="/stories/show/{{_id}}" class="a--default-style-removed">
+                <div class="card-body">
+                    {{!-- <span class="card__icons card__icons--edit mb-2"><i class="fas fa-pen"></i></span> --}}
+                    <h5 class="card-title">{{title}}</h5>
+                    {{!-- card-text--truncate fade effect reference: https://stackoverflow.com/questions/22666063/how-to-fade-the-edge-of-a-div-with-just-css --}}
+                    <div class="card-text card-text--truncate">
+                        {{{bodyText}}}
+                    </div>
+                </div>
+            </a>
+        </div>
+        {{/each}}
+    </div>
+</div>

@@ -54,6 +54,7 @@
 
 .third-party-login-btn--modal {
     width: 70%;
+    display: block;
     margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
@@ -65,6 +66,7 @@
     position: relative;
     top: -10px;
     left: 15px;
+    cursor: pointer;
 }
 
 .nav-link--color {
@@ -118,7 +120,6 @@
 
 .card__icons {
     font-size: 1.1rem;
-    /* float: right; */
 }
 
 .card__section-divider--clear {
@@ -147,7 +148,7 @@
 }
 
 .user-section__follow-btn {
-    background-color: var(--main-grey-color);
+    background-color: var(--main-green-color);
     border: 0px;
     border-radius: 20px;
     margin: 15px 0px;
@@ -166,4 +167,72 @@
 
 .container-fluid--grey-background {
     background-color: var(--grey-background-color);
+}
+
+.container-fluid--dashboard-header-image {
+    height: 300px;
+}
+
+.container--top-padding-compensation {
+    margin-top: -3rem;
+}
+
+.dashboard__user-avatar {
+    height: 85px;
+    margin-top: -20px;
+}
+
+.dashboard__user-name {
+    display: inline-block;
+    font-size: 1.3em;
+    padding: 15px 0px;
+}
+
+.dashboard__follow-btn {
+    background-color: var(--main-green-color);
+    border: 0px;
+    border-radius: 20px;
+    margin: 15px 0px;
+    font-size: 0.85rem;
+    width: 135px;
+}
+
+.card-header__dashboard {
+    background-color: white;
+    border: none;
+}
+
+.sub-nav-menu--link {
+    color: var(--main-grey-color);
+}
+
+.sub-nav-menu--link:hover {
+    color: black;
+}
+
+.sub-nav-menu--active {
+    color: black;
+    font-weight: 500;
+    border-bottom: 4px solid var(--main-green-color);
+}
+
+.card__icons--edit {
+    display: block;
+    text-align: right;
+}
+
+.user-section__action-text {
+    font-size:  1rem;
+    font-weight: unset;
+    display: inline-block;
+}
+
+.user-section__action-edit:hover {
+    color: var(--main-green-color);
+}
+
+.user-section__action-delete:hover {
+    cursor: pointer;
+    color: var(--danger-color);
+}
 }
