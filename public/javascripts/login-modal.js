@@ -2,7 +2,7 @@ document.getElementById('js-navbar__login-btn').addEventListener('click', functi
     document.querySelector('.login-modal').style.display = "block";
 });
 
-document.querySelector('.js-close-btn__icon').addEventListener('click', function () {
+document.querySelector('.js-login-modal-close-btn__icon').addEventListener('click', function () {
     document.querySelector('.login-modal').style.display = "none";
 });
 
