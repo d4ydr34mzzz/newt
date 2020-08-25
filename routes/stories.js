@@ -19,7 +19,6 @@ router.get('/', (req, res) => {
 
 router.get('/show/:id', (req, res) => {
     Story.findOne({ _id: req.params.id }).populate('user').lean().then((story) => {
-        console.log(story);
         res.render('stories/show', {
             useGreyBackground: true,
             story: story
@@ -27,7 +26,18 @@ router.get('/show/:id', (req, res) => {
     }).catch((e) => {
         // TODO: Have a flash message saying there was an issue retrieving the specified story on the frontend
         console.log(e);
-        res.redirect('/stories');
+        res.redirect('/stories/my');
+    });
+});
+
+router.get('/edit/:id', (req, res) => {
+    Story.findOne({_id:req.params.id}).lean().then((story) => {
+        res.render('stories/edit', {
+            story: story
+        });
+    }).catch((e) => {
+        console.log(e);
+        res.redirect('/stories/my');
     });
 });
 

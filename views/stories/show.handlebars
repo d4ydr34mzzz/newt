@@ -46,6 +46,21 @@
 
     <div class="col-sm-8 col-md-3">
         <div class="user-section">
+            <a href="/stories/edit/{{story._id}}" class="a--default-style-removed">
+                <div class="pb-2 pt-2 mt-3 mt-sm-0 mb-3 user-section__action-edit">
+                    <i class="fas fa-pen mr-1" aria-hidden="true"></i>
+                    <h3 class="user-section__action-text">Edit story</h3>
+                </div>
+            </a>
+            
+            {{!-- Show an alert to confirm the deletion --}}
+            <div class="pb-2 pt-2 mb-3 user-section__action-delete" id="js-delete-story-btn"> 
+                <i class="far fa-trash-alt mr-1" aria-hidden="true"></i>
+                <h3 class="user-section__action-text">Delete story</h3>
+            </div>
+        </div>
+
+        <div class="user-section">
             <a href="#" class="a--default-style-removed">
                 <img src="{{story.user.picture}}" class="rounded-circle user-section__avatar" alt="">
                 <div class="user-section__username">{{story.user.firstName}} {{story.user.lastName}}</div>
