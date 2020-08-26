@@ -77,7 +77,7 @@
         
         // {{!-- Reference: https://codepen.io/quill/pen/kXRjQJ and https://quilljs.com/docs/api/#content 
         // and https://stackoverflow.com/questions/42541353/how-do-i-retrieve-the-contents-of-a-quill-text-editor --}}
-        document.querySelector('form').addEventListener('submit', function () {
+        document.getElementById('js-card-body__form').addEventListener('submit', function () {
             document.querySelector('input[name=storyText]').value = quill.root.innerHTML;
             document.querySelector('input[name=storyDelta]').value = quill.getContents();
         });

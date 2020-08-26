@@ -287,3 +287,7 @@
 .confirm-delete-modal__choice-btn--no {
     background-color: #ececec;
 }
+
+.form--inline-block {
+    display: inline-block;
+}

@@ -5,7 +5,7 @@
                 Story details
             </div>
             <div class="card-body">
-                <form method="post" action="/stories/{{story._id}}?_method=PUT">
+                <form id="js-card-body__form" method="post" action="/stories/{{story._id}}?_method=PUT">
                     <div class="form-group">
                         <input type="text" class="form-control" name="title" placeholder="Title" value="{{story.title}}" required>
                     </div>

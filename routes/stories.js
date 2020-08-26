@@ -157,6 +157,29 @@ router.put('/:id', ensureAuthenticated, (req, res) => {
     });
 });
 
+// Delete request route handler for the /stories path
+router.delete('/:id', (req, res) => {
+    class UnauthorizedRequestError extends Error {
+        constructor(...params) {
+            super(...params);
+            this.name = "UnauthorizedRequestError";
+        }
+    }
+
+    Story.deleteOne({ _id: req.params.id, user: req.user._id }).then((story) => {
+        if (!story) {
+            throw new UnauthorizedRequestError();
+        }
+
+        req.flash('success_message', 'Story removed');
+        res.redirect('/');
+    }).catch((e) => {
+        if (e instanceof UnauthorizedRequestError) {
+            req.flash('error_message', 'Not authorized');
+            res.redirect('/');
+        } else {
+            // TODO: Ideally, the user would be shown this message without the redirect causing their work to be lost!
+            req.flash('error_message', 'There was an issue processing the request. Please try again later.');
             res.redirect(`/stories/edit/${req.params.id}`);
         }
     });

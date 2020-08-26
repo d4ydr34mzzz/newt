@@ -5,7 +5,9 @@
         </span>
         <div class="container container--clear">
             <p class="confirm-delete-modal__p">Are you sure you want to delete this story? This action cannot be undone.</p>
-            <a href="/stories/delete/{{story._id}}" class="btn btn-secondary confirm-delete-modal__choice-btn confirm-delete-modal__choice-btn--yes">Yes</a>
+            <form class ="form--inline-block" method="post" action="/stories/{{story._id}}?_method=DELETE">
+                <button type="submit" class="btn btn-secondary confirm-delete-modal__choice-btn confirm-delete-modal__choice-btn--yes">Yes</button>
+            </form>
             <button type="button" class="btn btn-light confirm-delete-modal__choice-btn confirm-delete-modal__choice-btn--no js-confirm-delete-modal__choice-btn--no">No</a>
         </div>
 
