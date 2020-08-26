@@ -1,19 +1,21 @@
-{{#if success_message}}
-    <div class="alert alert-success" role="alert">
-        {{success_message}}
-    </div>
-{{/if}}
-
-{{#if error_message}}
-    <div class="alert alert-danger" role="alert">
-        {{error_message}}
-    </div>
-{{/if}}
-
-{{#if form_validation_error_msgs}}
-    {{#each form_validation_error_msgs}}
-        <div class="alert alert-danger" role="alert">
-            {{this.msg}}
+<div class="container">
+    {{#if success_message}}
+        <div class="alert alert-success" role="alert">
+            {{success_message}}
         </div>
-    {{/each}}
-{{/if}}
+    {{/if}}
+
+    {{#if error_message}}
+        <div class="alert alert-danger" role="alert">
+            {{error_message}}
+        </div>
+    {{/if}}
+
+    {{#if form_validation_error_messages}}
+        {{#each form_validation_error_messages}}
+            <div class="alert alert-danger" role="alert">
+                {{this.msg}}
+            </div>
+        {{/each}}
+    {{/if}}
+</div>
