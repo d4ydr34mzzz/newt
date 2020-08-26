@@ -6,6 +6,7 @@ const path = require('path');
 const exhbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const MongoStore = require('connect-mongo')(session);
+const flash = require('connect-flash');
 require('dotenv').config();
 const app = express();
 const indexRouter = require('./routes/index.js');
@@ -36,6 +37,9 @@ app.use(session({
     cookie: { maxAge: 180 * 60 * 1000 }
 }));
 
+// Use connect-flash middleware
+app.use(flash());
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -63,6 +67,8 @@ app.use(function (req, res, next) {
 
         res.locals.user = newUserObject || null;
     }
+    res.locals.success_msg = req.flash('success_message');
+    res.locals.error_msg = req.flash('error_message');
     next();
 });
 
