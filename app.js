@@ -6,6 +6,7 @@ const path = require('path');
 const exhbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const MongoStore = require('connect-mongo')(session);
+const methodOverride = require('method-override');
 const flash = require('connect-flash');
 require('dotenv').config();
 const app = express();
@@ -53,6 +54,9 @@ require('./config/passport.js')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
+// method-override middleware
+app.use(methodOverride('_method'));
+
 // Custom middleware to expose request-level information using res.locals
 // *** Important reference: https://stackoverflow.com/questions/59690923/handlebars-access-has-been-denied-to-resolve-the-property-from-because-it-is *** //
 app.use(function (req, res, next) {
@@ -69,6 +73,7 @@ app.use(function (req, res, next) {
     }
     res.locals.success_msg = req.flash('success_message');
     res.locals.error_msg = req.flash('error_message');
+    res.locals.form_validation_error_msgs = req.flash('form_validation_error_msgs');
     next();
 });
 

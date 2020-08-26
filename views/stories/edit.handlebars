@@ -5,7 +5,7 @@
                 Story details
             </div>
             <div class="card-body">
-                <form action="/stories" method="post">
+                <form method="post" action="/stories/{{story._id}}?_method=PUT">
                     <div class="form-group">
                         <input type="text" class="form-control" name="title" placeholder="Title" value="{{story.title}}" required>
                     </div>
@@ -27,7 +27,7 @@
                         <input type="checkbox" class="form-check-input" name="allowComments" {{#if story.allowComments}}checked="checked"{{/if}}>
                         <label class="form-check-label" for="allowComments">Allow comments</label>
                     </div>
-                    <button type="submit" class="btn btn-primary btn--main-green-color">Publish</button>
+                    <button type="submit" class="btn btn-primary btn--main-green-color">Save</button>
                 </form>
             </div>
         </div>
