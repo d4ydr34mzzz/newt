@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 
 // Get request route handler for the /stories/show/:id path (i.e. the show story page for a story with id)
 router.get('/show/:id', (req, res) => {
-    Story.findOne({ _id: req.params.id }).populate('user').lean().then((story) => {
+    Story.findOne({ _id: req.params.id }).populate('user').populate('comments.commentUser').lean().then((story) => {
         res.render('stories/show', {
             useGreyBackground: true,
             story: story
@@ -79,6 +79,25 @@ router.post('/', ensureAuthenticated, (req, res) => {
         // TODO: Ideally, the user would be shown this message without the redirect causing their work to be lost!
         req.flash('error_message', 'There was an issue processing the request. Please try again later.');
         res.redirect('/dashboard');
+    });
+});
+
+// Post request route handler for the /stories/comment/:id path (i.e. comments under a story with id)
+router.post('/comment/:id', ensureAuthenticated, (req, res) => {
+    Story.findOne({ _id: req.params.id }).then((story) => {
+        const newComment = {
+            commentBody: req.body.commentBody,
+            commentUser: req.user._id
+        }
+
+        // Unshifting new comments will make it so that the newest comments are at the top.
+        story.comments.unshift(newComment);
+        return story.save();
+    }).then((story) => {
+        res.redirect(`/stories/show/${req.params.id}`);
+    }).catch((e) => {
+        req.flash('error_message', 'There was an issue processing the request. Please try again later.');
+        res.redirect(`/stories/show/${req.params.id}`);
     });
 });
 

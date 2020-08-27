@@ -83,6 +83,20 @@
         });
     </script>
 
+    <script>
+        // {{!-- Reference: https://gomakethings.com/automatically-expand-a-textarea-as-the-user-types-using-vanilla-javascript/ --}}
+        function autoExpand(element) {
+            element.style.height ='inherit';
+            var style = window.getComputedStyle(element);
+            var height = parseInt(style.getPropertyValue('border-top-width')) + parseInt(style.getPropertyValue('padding-top')) + element.scrollHeight + parseInt(style.getPropertyValue('padding-bottom')) + parseInt(style.getPropertyValue('border-bottom-width')); 
+            element.style.height = height + 'px';
+        }
+
+        document.getElementById('js-auto-expand-textarea').addEventListener('input', function (event) {
+             autoExpand(event.target);  
+        });
+    </script>
+
 </body>
 
 </html>

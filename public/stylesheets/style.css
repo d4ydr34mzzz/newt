@@ -291,3 +291,25 @@
 .form--inline-block {
     display: inline-block;
 }
+
+.comment {
+    margin: 25px 0px;
+}
+
+.comment__avatar {
+    height: 30px;
+}
+
+.comment__send-btn {
+    float: right;
+    margin-top: 10px;
+}
+
+.comment__textarea {
+    min-height: 5em;
+    max-height: 50vh;
+}
+
+.card-section--remove-bottom-padding {
+    padding-bottom: 0px;
+}

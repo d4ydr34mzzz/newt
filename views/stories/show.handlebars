@@ -37,9 +37,37 @@
                     </div>
                 </div>
                 <div class="card__section-divider card__section-divider--clear"></div>
-                <div class="card__section">
+                <div class="card__section card-section--remove-bottom-padding">
                     <h2 class="section__title">Comments</h2>
                 </div>
+                {{#if user}}
+                    <div class="container mt-4">
+                        <div class="row comment">
+                            <div class="col-12 col-sm-1">
+                                <img src="{{user.picture}}" class="rounded-circle comment__avatar mb-2 mb-sm-0" alt="">
+                            </div>
+                            <div class="col-12 col-sm-11">
+                                <form action="/stories/comment/{{story._id}}" method="post">
+                                    <textarea class="form-control comment__textarea" id="js-auto-expand-textarea" name="commentBody" rows="1"></textarea>
+                                    <button type="submit" class="btn btn-primary btn--main-green-color comment__send-btn">Send</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {{/if}}
+                {{#each story.comments}}
+                    <div class="container mt-4">
+                        <div class="row comment">
+                            <div class="col-12 col-sm-1">
+                                <img src="{{this.commentUser.picture}}" class="rounded-circle comment__avatar mb-2 mb-sm-0" alt="">
+                            </div>
+                            <div class="col-12 col-sm-11">
+                                <p>{{this.commentBody}}</p>
+                                <small class="text-muted">{{formatDate this.commentDate 'MMMM Do, YYYY'}}</small>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
             </div>
         </div>
     </div>
