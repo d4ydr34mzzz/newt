@@ -173,7 +173,7 @@ router.put('/:id', ensureAuthenticated, (req, res) => {
             errors.push({ msg: 'Please add a title' });
         }
 
-        if (!req.body.storyText) {
+        if (!req.body.checkStory) {
             errors.push({ msg: 'Please add a story body' });
         }
 
