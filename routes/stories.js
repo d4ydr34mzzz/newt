@@ -101,6 +101,10 @@ router.post('/', ensureAuthenticated, (req, res) => {
 // Post request route handler for the /stories/comment/:id path (i.e. comments under a story with id)
 router.post('/comment/:id', ensureAuthenticated, (req, res) => {
     Story.findOne({ _id: req.params.id }).then((story) => {
+        if(!story.allowComments){
+            throw new Error();
+        }
+        
         const newComment = {
             commentBody: req.body.commentBody,
             commentUser: req.user._id
