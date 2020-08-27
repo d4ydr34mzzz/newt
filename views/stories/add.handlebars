@@ -7,22 +7,25 @@
             <div class="card-body">
                 <form id="js-card-body__form" action="/stories" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="title" placeholder="Title" value="" required>
+                        <input type="text" class="form-control" name="title" placeholder="Title" value="{{title}}" required>
                     </div>
                     <div class="form-group">
                         <input name="storyText" type="hidden">
                         <input name="storyDelta" type="hidden">
-                        <div id="js-editor-container" class="editor-container--height"></div>
+                        <input name="checkStory" type="hidden">
+                        <div id="js-editor-container" class="editor-container--height">{{{storyText}}}</div>
                     </div>
                     <div class="form-group mt-4 mb-4">
                         <label for="status">Status</label>
-                        <select name="status" class="form-control" required>
-                            <option value="public" selected>Public</option>
-                            <option value="private">Private</option>
-                        </select>
+                        {{#select status}}
+                            <select name="status" class="form-control" required>
+                                <option value="public" selected>Public</option>
+                                <option value="private">Private</option>
+                            </select>
+                        {{/select}}
                     </div>
                     <div class="form-group form-check mt-4 mb-4">
-                        <input type="checkbox" class="form-check-input" name="allowComments" checked="checked">
+                        <input type="checkbox" class="form-check-input" name="allowComments" {{#if allowComments}}checked="checked"{{/if}}>
                         <label class="form-check-label" for="allowComments">Allow comments</label>
                     </div>
                     <button type="submit" class="btn btn-primary btn--main-green-color">Publish</button>

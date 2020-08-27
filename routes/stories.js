@@ -68,34 +68,55 @@ router.get('/add', ensureAuthenticated, (req, res) => {
 // Post request route handler for the /stories path
 router.post('/', ensureAuthenticated, (req, res) => {
 
-    // TODO: Handle errors in the form submission before saving anything to the database
     // TODO: Is it ok to save the Delta object directly to a document?
 
-    let allowComments = false;
+    let errors = [];
 
-    if (req.body.allowComments) {
-        allowComments = true;
+    if (!req.body.title) {
+        errors.push({ msg: 'Please add a title' });
     }
 
-    const newStory = {
-        title: req.body.title,
-        bodyText: req.body.storyText,
-        bodyDelta: req.body.storyDelta,
-        status: req.body.status,
-        allowComments: allowComments,
-        user: req.user._id
+    if (!req.body.checkStory) {
+        errors.push({ msg: 'Please add a story body' });
     }
 
-    console.log(newStory);
+    if (!req.body.status) {
+        errors.push({ msg: 'Please set the story status' });
+    }
 
-    new Story(newStory).save().then((story) => {
-        req.flash('success_message', 'Story published');
-        res.redirect(`/stories/show/${story._id}`);
-    }).catch((e) => {
-        // TODO: Ideally, the user would be shown this message without the redirect causing their work to be lost!
-        req.flash('error_message', 'There was an issue processing the request. Please try again later.');
-        res.redirect('/dashboard');
-    });
+    if (errors.length > 0) {
+        res.render('stories/add', {
+            title: req.body.title,
+            storyText: req.body.storyText,
+            status: req.body.status,
+            allowComments: req.body.allowComments,
+            form_validation_error_messages: errors
+        });
+    } else {
+        let allowComments = false;
+
+        if (req.body.allowComments) {
+            allowComments = true;
+        }
+
+        const newStory = {
+            title: req.body.title,
+            bodyText: req.body.storyText,
+            bodyDelta: req.body.storyDelta,
+            status: req.body.status,
+            allowComments: allowComments,
+            user: req.user._id
+        }
+
+        new Story(newStory).save().then((story) => {
+            req.flash('success_message', 'Story published');
+            res.redirect(`/stories/show/${story._id}`);
+        }).catch((e) => {
+            // TODO: Ideally, the user would be shown this message without the redirect causing their work to be lost!
+            req.flash('error_message', 'There was an issue processing the request. Please try again later.');
+            res.redirect('/dashboard');
+        });
+    }
 });
 
 // Post request route handler for the /stories/comment/:id path (i.e. comments under a story with id)

@@ -80,6 +80,11 @@
         document.getElementById('js-card-body__form').addEventListener('submit', function () {
             document.querySelector('input[name=storyText]').value = quill.root.innerHTML;
             document.querySelector('input[name=storyDelta]').value = quill.getContents();
+            // {{!-- Reference: https://stackoverflow.com/questions/822452/strip-html-from-text-javascript --}}
+            document.querySelector('input[name=checkStory]').value = (function () {
+                let doc = new DOMParser().parseFromString(quill.getText(), 'text/html');
+                return doc.body.textContent || "";
+            }());
         });
     </script>
 
