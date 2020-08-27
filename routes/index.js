@@ -20,8 +20,8 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
             stories: stories
         });
     }).catch((e) => {
-        // TODO: Need to redirect to an appropriate page and flash message
-        console.log(e);
+        req.flash('error_message', 'There was an issue processing the request. Please try again later.');
+        res.redirect('/stories');
     });
 });
 

@@ -56,7 +56,7 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
     }
 
     Story.findOne({ _id: req.params.id, user: req.user._id }).lean().then((story) => {
-        if(!story){
+        if (!story) {
             throw new UnauthorizedRequestError();
         }
 
@@ -64,7 +64,7 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
             story: story
         });
     }).catch((e) => {
-        if(e instanceof UnauthorizedRequestError){
+        if (e instanceof UnauthorizedRequestError) {
             req.flash('error_message', 'Not authorized');
             res.redirect('/stories');
         } else {
@@ -252,11 +252,11 @@ router.delete('/:id', (req, res) => {
         }
 
         req.flash('success_message', 'Story removed');
-        res.redirect('/');
+        res.redirect('/dashboard');
     }).catch((e) => {
         if (e instanceof UnauthorizedRequestError) {
             req.flash('error_message', 'Not authorized');
-            res.redirect('/');
+            res.redirect('/stories');
         } else {
             // TODO: Ideally, the user would be shown this message without the redirect causing their work to be lost!
             req.flash('error_message', 'There was an issue processing the request. Please try again later.');
