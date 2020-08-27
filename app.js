@@ -13,7 +13,7 @@ const app = express();
 const indexRouter = require('./routes/index.js');
 const authRouter = require('./routes/auth.js');
 const storiesRouter = require('./routes/stories.js');
-const { formatDate, select } = require('./helpers/hbs.js');
+const { formatDate, select, displayStoryOptions } = require('./helpers/hbs.js');
 const port = process.env.PORT || 3000;
 
 // Specify the location of the public folder to serve static assets
@@ -62,6 +62,7 @@ app.use(methodOverride('_method'));
 app.use(function (req, res, next) {
     if (req.user) {
         const newUserObject = {
+            _id: req.user._id,
             email: req.user.email,
             firstName: req.user.firstName,
             lastName: req.user.lastName,
@@ -82,7 +83,8 @@ const hbs = exhbs.create({
     // Specify helpers which are only registered on this instance
     helpers: {
         formatDate: formatDate,
-        select: select
+        select: select,
+        displayStoryOptions: displayStoryOptions
     }
 });
 
