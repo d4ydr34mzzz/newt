@@ -21,14 +21,28 @@ router.get('/', (req, res) => {
 // Get request route handler for the /stories/show/:id path (i.e. the show story page for a story with id)
 router.get('/show/:id', (req, res) => {
     Story.findOne({ _id: req.params.id }).populate('user').populate('comments.commentUser').lean().then((story) => {
-        res.render('stories/show', {
-            useGreyBackground: true,
-            story: story
-        });
+        if (story.status == 'public') {
+            res.render('stories/show', {
+                useGreyBackground: true,
+                story: story
+            });
+        } else if (story.status == 'private') {
+            if (req.user) {
+                if (String(req.user._id) !== String(story.user._id)) {
+                    res.redirect('/stories');
+                } else {
+                    res.render('stories/show', {
+                        useGreyBackground: true,
+                        story: story
+                    });
+                }
+            } else {
+                res.redirect('/stories');
+            }
+        }
     }).catch((e) => {
-        // TODO: Have a flash message saying there was an issue retrieving the specified story on the frontend
-        console.log(e);
-        res.redirect('/stories/my');
+        req.flash('error_message', 'There was an issue processing the request. Please try again later.');
+        res.redirect('/stories');
     });
 });
 
