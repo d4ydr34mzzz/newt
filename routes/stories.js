@@ -34,13 +34,29 @@ router.get('/show/:id', (req, res) => {
 
 // Get request route handler for the /stories/edit/:id path (i.e. the edit story page for a story for with id)
 router.get('/edit/:id', ensureAuthenticated, (req, res) => {
-    Story.findOne({ _id: req.params.id }).lean().then((story) => {
+    class UnauthorizedRequestError extends Error {
+        constructor(...params) {
+            super(...params);
+            this.name = "UnauthorizedRequestError";
+        }
+    }
+
+    Story.findOne({ _id: req.params.id, user: req.user._id }).lean().then((story) => {
+        if(!story){
+            throw new UnauthorizedRequestError();
+        }
+
         res.render('stories/edit', {
             story: story
         });
     }).catch((e) => {
-        console.log(e);
-        res.redirect('/stories/my');
+        if(e instanceof UnauthorizedRequestError){
+            req.flash('error_message', 'Not authorized');
+            res.redirect('/stories');
+        } else {
+            req.flash('error_message', 'There was an issue processing the request. Please try again later.');
+            res.redirect('/dashboard');
+        }
     });
 });
 
