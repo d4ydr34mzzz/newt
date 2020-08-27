@@ -206,7 +206,7 @@ router.delete('/:id', (req, res) => {
     }
 
     Story.deleteOne({ _id: req.params.id, user: req.user._id }).then((story) => {
-        if (!story) {
+        if (!story.deletedCount) {
             throw new UnauthorizedRequestError();
         }
 
