@@ -136,6 +136,12 @@ router.post('/', ensureAuthenticated, (req, res) => {
 // Post request route handler for the /stories/comment/:id path (i.e. comments under a story with id)
 router.post('/comment/:id', ensureAuthenticated, (req, res) => {
     Story.findOne({ _id: req.params.id }).then((story) => {
+        if (story.status == 'private') {
+            if (String(req.user._id) !== String(story.user._id)) {
+                throw new Error();
+            }
+        }
+
         if(!story.allowComments){
             throw new Error();
         }
