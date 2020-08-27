@@ -11,7 +11,7 @@ const Story = mongoose.model('Story');
 
 // Get request route handler for the /stories path (i.e. the public stories page)
 router.get('/', (req, res) => {
-    Story.find({ status: 'public' }).populate('user').lean().then((stories) => {
+    Story.find({ status: 'public' }).populate('user').lean().sort({ date: 'desc' }).then((stories) => {
         res.render('stories/index', {
             stories: stories
         });
