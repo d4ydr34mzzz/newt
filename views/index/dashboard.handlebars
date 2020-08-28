@@ -1,11 +1,22 @@
-{{#with user}}
-<div class="container container--top-padding-compensation">
-    <img src="{{picture}}" alt="" class="rounded-circle dashboard__user-avatar">
-    <h1 class="dashboard__user-name ml-md-2">{{fullName}}</h1>
-    <a href="#" class="btn btn-secondary dashboard__follow-btn d-block d-sm-inline float-sm-right"><i
-            class="fas fa-plus mr-2"></i>Follow</a>
-</div>
-{{/with}}
+{{#if secondaryUser}}
+    {{#with secondaryUser}}
+        <div class="container container--top-padding-compensation">
+            <img src="{{picture}}" alt="" class="rounded-circle dashboard__user-avatar">
+            <h1 class="dashboard__user-name ml-md-2">{{fullName}}</h1>
+            <a href="#" class="btn btn-secondary dashboard__follow-btn d-block d-sm-inline float-sm-right"><i
+                    class="fas fa-plus mr-2"></i>Follow</a>
+        </div>
+    {{/with}}
+{{else}}
+    {{#with user}}
+        <div class="container container--top-padding-compensation">
+            <img src="{{picture}}" alt="" class="rounded-circle dashboard__user-avatar">
+            <h1 class="dashboard__user-name ml-md-2">{{fullName}}</h1>
+            <a href="#" class="btn btn-secondary dashboard__follow-btn d-block d-sm-inline float-sm-right"><i
+                    class="fas fa-plus mr-2"></i>Follow</a>
+        </div>
+    {{/with}}
+{{/if}}
 
 <div class="container pt-5">
     <ul class="nav">
