@@ -57,6 +57,16 @@ app.use(passport.session());
 // method-override middleware
 app.use(methodOverride('_method'));
 
+// Custom middleware to ensure private stories are not viewable if the back button is clicked after the user logs out
+// References:
+// https://stackoverflow.com/questions/15972159/how-can-i-prevent-the-browsers-back-button-from-accessing-restricted-informatio/45089622
+// https://stackoverflow.com/questions/6096492/node-js-and-express-session-handling-back-button-problem
+// https://stackoverflow.com/questions/28346746/browser-back-button-doesnt-destroy-the-session-in-passportjs-expressjs-how-t
+app.use(function (req, res, next) {
+    res.set('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    next();
+});
+
 // Custom middleware to expose request-level information using res.locals
 // *** Important reference: https://stackoverflow.com/questions/59690923/handlebars-access-has-been-denied-to-resolve-the-property-from-because-it-is *** //
 app.use(function (req, res, next) {
