@@ -67,7 +67,7 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
     }).catch((e) => {
         if (e instanceof UnauthorizedRequestError) {
             req.flash('error_message', 'Not authorized');
-            res.redirect('/stories');
+            res.redirect('/dashboard');
         } else {
             req.flash('error_message', 'There was an issue processing the request. Please try again later.');
             res.redirect('/dashboard');
@@ -129,7 +129,7 @@ router.post('/', ensureAuthenticated, (req, res) => {
         }).catch((e) => {
             // TODO: Ideally, the user would be shown this message without the redirect causing their work to be lost!
             req.flash('error_message', 'There was an issue processing the request. Please try again later.');
-            res.redirect('/dashboard');
+            res.redirect('/story/add');
         });
     }
 });
@@ -259,9 +259,8 @@ router.delete('/:id', (req, res) => {
             req.flash('error_message', 'Not authorized');
             res.redirect('/stories');
         } else {
-            // TODO: Ideally, the user would be shown this message without the redirect causing their work to be lost!
             req.flash('error_message', 'There was an issue processing the request. Please try again later.');
-            res.redirect(`/stories/edit/${req.params.id}`);
+            res.redirect(`/stories/show/${req.params.id}`);
         }
     });
 });

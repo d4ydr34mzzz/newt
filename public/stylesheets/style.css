@@ -330,13 +330,19 @@
 }
 
 .card-body--story-summary:hover {
-    box-shadow: 0 0 0 1px var(--main-grey-color);
+    box-shadow: 0 0 0 1px rgba(107,120,127,0.5);
 }
 
 .card-body--story-summary:focus-within {
-    box-shadow: 0 0 0 1px var(--main-grey-color);
+    box-shadow: 0 0 0 1px rgba(107,120,127,0.5);
 }
 
 .comment__h5 {
     font-size: 1rem;
 }
+
+/* .container-fluid--welcome-page-image-background {
+    background-image: url('/images/3251.jpg');
+    background-repeat: no-repeat;
+    background-size: 45%;
+  } */
