@@ -329,11 +329,11 @@
     font-weight: 600;
 }
 
-.card-body--public-stories-page:hover {
+.card-body--story-summary:hover {
     box-shadow: 0 0 0 1px var(--main-grey-color);
 }
 
-.card-body--public-stories-page:focus-within {
+.card-body--story-summary:focus-within {
     box-shadow: 0 0 0 1px var(--main-grey-color);
 }
 
