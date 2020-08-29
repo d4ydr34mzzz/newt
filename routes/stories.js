@@ -14,8 +14,11 @@ router.get('/', (req, res) => {
     Story.find({ status: 'public' }).populate('user').lean().sort({ date: 'desc' }).then((stories) => {
         res.render('stories/index', {
             stories: stories,
-            publicStoriesPage: true
+            storyCards: true
         });
+    }).catch((e) => {
+        req.flash('error_message', 'There was an issue processing the request. Please try again later.');
+        res.redirect('/');
     });
 });
 
@@ -78,6 +81,18 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
 // Get request route handler for the /stories/add path
 router.get('/add', ensureAuthenticated, (req, res) => {
     res.render('stories/add');
+});
+
+router.get('/my', ensureAuthenticated, (req, res) => {
+    Story.find({ user: req.user._id }).populate('user').lean().sort({ date: 'desc' }).then((stories) => {
+        res.render('stories/my', {
+            stories: stories,
+            storyCards: true
+        });
+    }).catch((e) => {
+        req.flash('error_message', 'There was an issue processing the request. Please try again later.');
+        res.redirect('/stories');
+    });
 });
 
 // Post request route handler for the /stories path
@@ -143,10 +158,10 @@ router.post('/comment/:id', ensureAuthenticated, (req, res) => {
             }
         }
 
-        if(!story.allowComments){
+        if (!story.allowComments) {
             throw new Error();
         }
-        
+
         const newComment = {
             commentBody: req.body.commentBody,
             commentUser: req.user._id
