@@ -13,7 +13,8 @@ const Story = mongoose.model('Story');
 router.get('/', (req, res) => {
     Story.find({ status: 'public' }).populate('user').lean().sort({ date: 'desc' }).then((stories) => {
         res.render('stories/index', {
-            stories: stories
+            stories: stories,
+            publicStoriesPage: true
         });
     });
 });

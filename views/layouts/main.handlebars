@@ -101,6 +101,26 @@
              autoExpand(event.target);  
         });
     </script>
+    
+    {{#if publicStoriesPage}}
+        <script>
+            // {{!-- References: https://css-tricks.com/nested-links/ and *** https://inclusive-components.design/cards/ *** --}}
+            let cards = document.querySelectorAll('.card-body');
+            Array.prototype.forEach.call(cards, function (card) {
+                let up, down, link = card.querySelector('h5 a');
+                card.style.cursor = 'pointer';
+                card.onmousedown = function () {
+                    down = new Date().getTime();
+                };
+                card.onmouseup = function () {
+                    up = new Date().getTime();
+                    if((up - down) < 200) {
+                        link.click();
+                    }
+                };
+            });
+        </script>
+    {{/if}}
 
 </body>
 

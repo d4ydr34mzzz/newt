@@ -313,3 +313,30 @@
 .card-section--remove-bottom-padding {
     padding-bottom: 0px;
 }
+
+.card__avatar {
+    height: 20px;
+    /* margin: 0px 5px; */
+    margin-left: 5px;
+}
+
+.card-text__a {
+    position: relative;
+    padding: 0.5rem 0.5rem 0.5rem 0rem;
+}
+
+.card-text__a:hover {
+    font-weight: 600;
+}
+
+.card-body--public-stories-page:hover {
+    box-shadow: 0 0 0 1px var(--main-grey-color);
+}
+
+.card-body--public-stories-page:focus-within {
+    box-shadow: 0 0 0 1px var(--main-grey-color);
+}
+
+.comment__h5 {
+    font-size: 1rem;
+}

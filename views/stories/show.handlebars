@@ -60,9 +60,14 @@
                         <div class="container mt-4">
                             <div class="row comment">
                                 <div class="col-12 col-sm-1">
-                                    <img src="{{this.commentUser.picture}}" class="rounded-circle comment__avatar mb-2 mb-sm-0" alt="">
+                                    <a href="/dashboard/{{this.commentUser._id}}">
+                                        <img src="{{this.commentUser.picture}}" class="rounded-circle comment__avatar mb-2 mb-sm-0" alt="">
+                                    </a>
                                 </div>
                                 <div class="col-12 col-sm-11">
+                                    <a href="/dashboard/{{this.commentUser._id}}" class="a--default-style-removed">
+                                        <h5 class="comment__h5">{{this.commentUser.firstName}} {{this.commentUser.lastName}}</h5>
+                                    </a>
                                     <p>{{this.commentBody}}</p>
                                     <small class="text-muted">{{formatDate this.commentDate 'MMMM Do, YYYY'}}</small>
                                 </div>
@@ -90,7 +95,7 @@
             </div>
         {{else}}
             <div class="user-section">
-                <a href="#" class="a--default-style-removed">
+                <a href="/dashboard/{{story.user._id}}" class="a--default-style-removed">
                     <img src="{{story.user.picture}}" class="rounded-circle user-section__avatar" alt="">
                     <div class="user-section__username">{{story.user.firstName}} {{story.user.lastName}}</div>
                 </a>
