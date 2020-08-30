@@ -21,5 +21,13 @@ module.exports = {
         } else {
             return false;
         }
+    },
+    // Reference: https://github.com/EthanRBrown/web-development-with-node-and-express/tree/master/ch07/views
+    section: function (name, options) {
+        if(!this._sections) {
+            this._sections = {}
+        }
+        this._sections[name] = options.fn(this);
+        return null;
     }
 }

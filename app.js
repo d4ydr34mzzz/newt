@@ -13,7 +13,7 @@ const app = express();
 const indexRouter = require('./routes/index.js');
 const authRouter = require('./routes/auth.js');
 const storiesRouter = require('./routes/stories.js');
-const { formatDate, select, displayStoryOptions } = require('./helpers/hbs.js');
+const { formatDate, select, displayStoryOptions, section } = require('./helpers/hbs.js');
 const port = process.env.PORT || 3000;
 
 // Specify the location of the public folder to serve static assets
@@ -94,7 +94,8 @@ const hbs = exhbs.create({
     helpers: {
         formatDate: formatDate,
         select: select,
-        displayStoryOptions: displayStoryOptions
+        displayStoryOptions: displayStoryOptions,
+        section: section
     }
 });
 

@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
     Story.find({ status: 'public' }).populate('user').lean().sort({ date: 'desc' }).then((stories) => {
         res.render('stories/index', {
             stories: stories,
-            storyCards: true
+            adjustStoryCardsForNestedLinks: true
         });
     }).catch((e) => {
         req.flash('error_message', 'There was an issue processing the request. Please try again later.');
@@ -28,6 +28,8 @@ router.get('/show/:id', (req, res) => {
         if (story.status == 'public') {
             res.render('stories/show', {
                 useGreyBackground: true,
+                setAutoExpandTextareas: true,
+                addConfirmDeleteModal: true,
                 story: story
             });
         } else if (story.status == 'private') {
@@ -37,6 +39,8 @@ router.get('/show/:id', (req, res) => {
                 } else {
                     res.render('stories/show', {
                         useGreyBackground: true,
+                        setAutoExpandTextareas: true,
+                        addConfirmDeleteModal: true,
                         story: story
                     });
                 }
@@ -65,6 +69,7 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
         }
 
         res.render('stories/edit', {
+            configureQuillEditor: true,
             story: story
         });
     }).catch((e) => {
@@ -80,14 +85,16 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
 
 // Get request route handler for the /stories/add path
 router.get('/add', ensureAuthenticated, (req, res) => {
-    res.render('stories/add');
+    res.render('stories/add', {
+        configureQuillEditor: true
+    });
 });
 
 router.get('/my', ensureAuthenticated, (req, res) => {
     Story.find({ user: req.user._id }).populate('user').lean().sort({ date: 'desc' }).then((stories) => {
         res.render('stories/my', {
             stories: stories,
-            storyCards: true
+            adjustStoryCardsForNestedLinks: true
         });
     }).catch((e) => {
         req.flash('error_message', 'There was an issue processing the request. Please try again later.');
@@ -116,6 +123,7 @@ router.post('/', ensureAuthenticated, (req, res) => {
 
     if (errors.length > 0) {
         res.render('stories/add', {
+            configureQuillEditor: true,
             title: req.body.title,
             storyText: req.body.storyText,
             status: req.body.status,

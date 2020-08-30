@@ -24,7 +24,7 @@ router.get('/', ensureGuest, (req, res) => {
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
     Story.find({ user: req.user._id }).lean().then((stories) => {
         res.render('index/dashboard', {
-            dashboardHeader: true,
+            showDashboardHeader: true,
             stories: stories
         });
     }).catch((e) => {
@@ -51,7 +51,7 @@ router.get('/dashboard/:id', (req, res) => {
         }).then((userInfo) => {
             Story.find({ user: userInfo._id, status: 'public' }).lean().then((stories) => {
                 res.render('index/dashboard', {
-                    dashboardHeader: true,
+                    showDashboardHeader: true,
                     stories: stories,
                     secondaryUser: userInfo
                 });
