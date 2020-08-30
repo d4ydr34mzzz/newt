@@ -26,18 +26,18 @@
     </ul>
     <div class="pt-4">
         {{#each stories}}
-        <div class="card mb-3">
-            <a href="/stories/show/{{_id}}" class="a--default-style-removed">
-                <div class="card-body card-body--story-summary">
-                    {{!-- <span class="card__icons card__icons--edit mb-2"><i class="fas fa-pen"></i></span> --}}
-                    <h5 class="card-title">{{title}}</h5>
-                    {{!-- card-text--truncate fade effect reference: https://stackoverflow.com/questions/22666063/how-to-fade-the-edge-of-a-div-with-just-css --}}
-                    <div class="card-text card-text--truncate">
-                        {{{bodyText}}}
+            <div class="card mb-3">
+                <a href="/stories/show/{{_id}}" class="a--default-style-removed">
+                    <div class="card-body card-body--story-summary">
+                        {{!-- <span class="card__icons card__icons--edit mb-2"><i class="fas fa-pen"></i></span> --}}
+                        <h5 class="card-title">{{title}}</h5>
+                        {{!-- card-text--truncate fade effect reference: https://stackoverflow.com/questions/22666063/how-to-fade-the-edge-of-a-div-with-just-css --}}
+                        <div class="card-text card-text--truncate">
+                            {{{bodyText}}}
+                        </div>
                     </div>
-                </div>
-            </a>
-        </div>
+                </a>
+            </div>
         {{/each}}
     </div>
 </div>

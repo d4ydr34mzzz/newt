@@ -98,7 +98,7 @@ const hbs = exhbs.create({
     }
 });
 
-//Set handlebars as the template engine to use with Express
+// Set handlebars as the template engine to use with Express
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 

@@ -240,7 +240,7 @@ router.put('/:id', ensureAuthenticated, (req, res) => {
     }).catch((e) => {
         if (e instanceof UnauthorizedRequestError) {
             req.flash('error_message', 'Not authorized');
-            res.redirect('/');
+            res.redirect('/dashboard');
         } else if (e instanceof FormValidationError) {
             // TODO: Ideally, the user would be shown this message without the redirect causing their work to be lost!
             req.flash('form_validation_error_messages', e.errors);
@@ -254,7 +254,7 @@ router.put('/:id', ensureAuthenticated, (req, res) => {
 });
 
 // Delete request route handler for the /stories path
-router.delete('/:id', (req, res) => {
+router.delete('/:id', ensureAuthenticated, (req, res) => {
     class UnauthorizedRequestError extends Error {
         constructor(...params) {
             super(...params);

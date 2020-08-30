@@ -15,10 +15,12 @@ require('../models/User.js');
 // Retrieve the User model that was defined by running User.js
 const User = mongoose.model('User');
 
+// Get request route handler for the / path (i.e. the welcome page)
 router.get('/', ensureGuest, (req, res) => {
     res.render('index/welcome');
 });
 
+// Get request route handler for the /dashboard path (i.e. a user's personal dashboard)
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
     Story.find({ user: req.user._id }).lean().then((stories) => {
         res.render('index/dashboard', {
@@ -31,8 +33,8 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
     });
 });
 
+// Get request route handler for the /dashboard/:id path (i.e. a user's public facing dashboard or profile page)
 router.get('/dashboard/:id', (req, res) => {
-    // console.log(req.user.id)
     if (req.user && (String(req.user._id) == req.params.id)) {
         res.redirect('/dashboard');
     } else {
