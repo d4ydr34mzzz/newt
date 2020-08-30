@@ -22,7 +22,7 @@ router.get('/', ensureGuest, (req, res) => {
 
 // Get request route handler for the /dashboard path (i.e. a user's personal dashboard)
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
-    Story.find({ user: req.user._id }).lean().then((stories) => {
+    Story.find({ user: req.user._id }).lean().sort({ date: 'desc' }).then((stories) => {
         res.render('index/dashboard', {
             showDashboardHeader: true,
             stories: stories
@@ -49,7 +49,7 @@ router.get('/dashboard/:id', (req, res) => {
             };
             return userInfo;
         }).then((userInfo) => {
-            Story.find({ user: userInfo._id, status: 'public' }).lean().then((stories) => {
+            Story.find({ user: userInfo._id, status: 'public' }).lean().sort({ date: 'desc' }).then((stories) => {
                 res.render('index/dashboard', {
                     showDashboardHeader: true,
                     stories: stories,
