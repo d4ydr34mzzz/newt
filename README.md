@@ -9,7 +9,7 @@
         <img src="https://img.shields.io/github/last-commit/d4ydr34mzzz/newt?style=flat-square" alt="Last commit">
     </a>
     <a href="https://github.com/d4ydr34mzzz/newt/blob/master/LICENSE">
-        <img src="https://img.shields.io/github/license/d4ydr34mzzz/newt" alt="Project license">
+        <img src="https://img.shields.io/github/license/d4ydr34mzzz/newt?style=flat-square" alt="Project license">
     </a>
 </p>
 
